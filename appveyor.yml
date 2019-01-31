@@ -5,12 +5,13 @@ branches:
     - appveyor
 
 platform: x64
-configuration:
-  - Release
-  - Debug
 
 matrix:
   fast_finish: true
+
+configuration:
+  - Release
+  - Debug
 
 skip_tags: true
 
@@ -24,22 +25,20 @@ init:
   - vcpkg install pdal:{platform}-windows
 
 environment:
-  global:
-    - VCPKG_ROOT: C:\Tools\vcpkg
-      TARGET_OS: windows
-      GDAL_DATA: C:\Tools\vcpkg\installed\{platform}-windows\share\gdal
-      PROJ_LIB: C:\Tools\vcpkg\installed\{platform}-windows\share\proj4
-  matrix:
-    - BUILD_TYPE: {configuration}
-      ARCH: {platform}
+  VCPKG_ROOT: C:\Tools\vcpkg
+  TARGET_OS: windows
 
 install:
+  - set ARCH=%PLATFORM%
+  - set BUILD_TYPE=%CONFIGURATION%
   - call make.bat
 
 build:
-  - echo "Built %ARCH%-%TARGET_OS%-%BUILD_TYPE%"
+  - echo "Built %PLATFORM%-%TARGET_OS%-%CONFIGURATION%"
 
 test_script:
+  - set GDAL_DATA=%VCPKG_ROOT%\installed\%PLATFORM%-%TARGET_OS%\share\gdal
+  - set PROJ_LIB=%VCPKG_ROOT%\installed\%PLATFORM%-%TARGET_OS%\share\proj4
   - if exist "build\%ARCH%-%TARGET_OS%\test_pdalc.exe" "build\%ARCH%-%TARGET_OS%\test_pdalc.exe"
   - if exist "build\%ARCH%-%TARGET_OS%\test_pdalcd.exe" "build\%ARCH%-%TARGET_OS%\test_pdalcd.exe"
 
