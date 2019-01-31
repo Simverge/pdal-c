@@ -33,7 +33,7 @@ install:
   - set BUILD_TYPE=%CONFIGURATION%
   - call make.bat
 
-build:
+build_script:
   - echo "Built %PLATFORM%-%TARGET_OS%-%CONFIGURATION%"
 
 test_script:
