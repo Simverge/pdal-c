@@ -1,7 +1,5 @@
 version: 1.0.{build}-{branch}
 
-clone_folder: C:\Projects\pdal-c
-
 branches:
   only:
     - appveyor
