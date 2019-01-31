@@ -22,7 +22,7 @@ clone_depth: 5
 
 init:
   - dir C:\Tools
-  - vcpkg install pdal:{platform}-windows
+  - vcpkg install pdal:%PLATFORM%-windows
 
 environment:
   VCPKG_ROOT: C:\Tools\vcpkg
