@@ -37,7 +37,7 @@ install:
   - call make.bat
 
 build:
-  - Echo "Build complete: %ARCH%-%TARGET_OS%-%BUILD_TYPE%"
+  - echo "Built %ARCH%-%TARGET_OS%-%BUILD_TYPE%"
 
 test_script:
   - if exist "build\%ARCH%-%TARGET_OS%\test_pdalc.exe" "build\%ARCH%-%TARGET_OS%\test_pdalc.exe"
