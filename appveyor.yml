@@ -1,0 +1,54 @@
+version: 1.0.{build}-{branch}
+
+clone_folder: C:\Projects\pdal-c
+
+branches:
+  only:
+    - appveyor
+
+platform: x64
+configuration:
+  - Release
+  - Debug
+
+matrix:
+  fast_finish: true
+
+skip_tags: true
+
+image: Visual Studio 2017
+
+shallow_clone: true
+clone_depth: 5
+
+init:
+  - dir C:\Tools
+  - vcpkg install pdal:{platform}-windows
+
+environment:
+  global:
+    - VCPKG_ROOT: C:\Tools\vcpkg
+      TARGET_OS: windows
+      GDAL_DATA: C:\Tools\vcpkg\installed\{platform}-windows\share\gdal
+      PROJ_LIB: C:\Tools\vcpkg\installed\{platform}-windows\share\proj4
+  matrix:
+    - BUILD_TYPE: {configuration}
+      ARCH: {platform}
+
+install:
+  - call make.bat
+
+build:
+  - Echo "Build complete: %ARCH%-%TARGET_OS%-%BUILD_TYPE%"
+
+test_script:
+  - if exist "build\%ARCH%-%TARGET_OS%\test_pdalc.exe" "build\%ARCH%-%TARGET_OS%\test_pdalc.exe"
+  - if exist "build\%ARCH%-%TARGET_OS%\test_pdalcd.exe" "build\%ARCH%-%TARGET_OS%\test_pdalcd.exe"
+
+after_test:
+  - if exist "build\%ARCH%-%TARGET_OS%\test_pdalc.exe" erase "build\%ARCH%-%TARGET_OS%\test_pdalc.exe"
+  - if exist "build\%ARCH%-%TARGET_OS%\test_pdalcd.exe" erase "build\%ARCH%-%TARGET_OS%\test_pdalcd.exe"
+
+
+
+
