@@ -21,7 +21,6 @@ shallow_clone: true
 clone_depth: 5
 
 init:
-  - dir C:\Tools
   - vcpkg install pdal:%PLATFORM%-windows
 
 environment:
