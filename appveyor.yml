@@ -27,6 +27,7 @@ init:
   - cd C:\Tools\vcpkg
   - git pull
   - vcpkg update
+  - bootstrap-vcpkg.bat
   - vcpkg install pdal:%PLATFORM%-windows
 
 environment:
