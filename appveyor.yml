@@ -24,6 +24,8 @@ cache:
   C:\Tools\vcpkg\installed -> appveyor.yml
 
 init:
+  - cd C:\Tools\vcpkg
+  - git pull
   - vcpkg update
   - vcpkg install pdal:%PLATFORM%-windows
 
@@ -48,8 +50,4 @@ test_script:
 after_test:
   - if exist "build\%ARCH%-%TARGET_OS%\test_pdalc.exe" erase "build\%ARCH%-%TARGET_OS%\test_pdalc.exe"
   - if exist "build\%ARCH%-%TARGET_OS%\test_pdalcd.exe" erase "build\%ARCH%-%TARGET_OS%\test_pdalcd.exe"
-
-artifacts:
-  - path: C:\Tools\vcpkg\buildtrees\geos\config-x64-windows-out.log
-    name: geos.log
 
