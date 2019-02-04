@@ -20,7 +20,7 @@ macro(DEFINE_PDAL_MODULE NAME HEADER LIBRARY)
 	if(PDAL_${NAME}_LIBRARY)
 		list(APPEND PDAL_LIBRARIES ${PDAL_${NAME}_LIBRARY})
 	endif()
-endmacro
+endmacro()
 
 DEFINE_PDAL_MODULE(cpp "pdal/pdal.hpp" pdalcpp)
 
