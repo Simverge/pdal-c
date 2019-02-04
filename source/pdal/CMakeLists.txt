@@ -1,6 +1,11 @@
 set(TARGET pdalc)
 
-find_package(PDAL REQUIRED CONFIG)
+find_package(PDAL)
+
+if(NOT PDAL_FOUND)
+	find_package(PDAL REQUIRED CONFIG)
+endif()
+
 message(STATUS "Found PDAL ${PDAL_VERSION}")
 
 set(SOURCES

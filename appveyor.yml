@@ -25,8 +25,13 @@ environment:
   PREFIX_PATH: '%OSGEO4W_ROOT%'
   TARGET_OS: windows
 
+
+cache:
+  - C:\Tools\downloads
+  - C:\Tools\osgeo4w64
+
 init:
-  - curl -s -S -o osgeo4w-setup-x86_64.exe http://download.osgeo.org/osgeo4w/osgeo4w-setup-x86_64.exe
+  - curl -s -S -o C:\Tools\downloads\osgeo4w-setup-x86_64.exe http://download.osgeo.org/osgeo4w/osgeo4w-setup-x86_64.exe
   - echo . | osgeo4w-setup-x86_64.exe --autoaccept --no-shortcuts --no-startmenu --no-desktop --quiet-mode --arch x86_64 --download --advanced --site http://download.osgeo.org/osgeo4w --root %OSGEO4W_ROOT% --packages pdal
 
 install:
