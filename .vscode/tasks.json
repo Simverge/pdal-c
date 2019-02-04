@@ -4,6 +4,58 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "osgeo4w-x64-windows-release",
+            "type": "shell",
+            "windows": {
+                "command": "${workspaceFolder}\\make.bat"
+            },
+            "options": {
+                "env": {
+                    "BUILD_TYPE": "Release",
+                    "ARCH": "x64",
+                    "TARGET_OS": "windows",
+                    "PREFIX_PATH": "${env:OSGEO4W_ROOT}"
+                }
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ]
+        },
+        {
+            "label": "osgeo4w-x64-windows-debug",
+            "type": "shell",
+            "windows": {
+                "command": "${workspaceFolder}\\make.bat"
+            },
+            "options": {
+                "env": {
+                    "BUILD_TYPE": "Debug",
+                    "ARCH": "x64",
+                    "TARGET_OS": "windows",
+                    "PREFIX_PATH": "${env:OSGEO4W_ROOT}"
+                }
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ]
+        },
+        {
             "label": "vcpkg-x64-windows-release",
             "type": "shell",
             "windows": {

@@ -20,19 +20,14 @@ image: Visual Studio 2017
 shallow_clone: true
 clone_depth: 5
 
-cache:
-  C:\Tools\vcpkg\installed -> appveyor.yml
+environment:
+  OSGEO4W_ROOT: C:\Tools\osgeo4w64
+  PREFIX_PATH: '%OSGEO4W_ROOT%'
+  TARGET_OS: windows
 
 init:
-  - cd C:\Tools\vcpkg
-  - git pull
-  - vcpkg update
-  - bootstrap-vcpkg.bat
-  - vcpkg install pdal:%PLATFORM%-windows
-
-environment:
-  VCPKG_ROOT: C:\Tools\vcpkg
-  TARGET_OS: windows
+  - curl -s -S -o osgeo4w-setup-x86_64.exe http://download.osgeo.org/osgeo4w/osgeo4w-setup-x86_64.exe
+  - echo . | osgeo4w-setup-x86_64.exe --autoaccept --no-shortcuts --no-startmenu --no-desktop --quiet-mode --arch x86_64 --download --advanced --site http://download.osgeo.org/osgeo4w --root %OSGEO4W_ROOT% --packages pdal
 
 install:
   - set ARCH=%PLATFORM%
@@ -43,8 +38,8 @@ build_script:
   - echo "Built %PLATFORM%-%TARGET_OS%-%CONFIGURATION%"
 
 test_script:
-  - set GDAL_DATA=%VCPKG_ROOT%\installed\%PLATFORM%-%TARGET_OS%\share\gdal
-  - set PROJ_LIB=%VCPKG_ROOT%\installed\%PLATFORM%-%TARGET_OS%\share\proj4
+  - set GDAL_DATA=%OSGEO4W_ROOT%\share\gdal
+  - set PROJ_LIB=%OSGEO4W_ROOT%\share\proj
   - if exist "build\%ARCH%-%TARGET_OS%\test_pdalc.exe" "build\%ARCH%-%TARGET_OS%\test_pdalc.exe"
   - if exist "build\%ARCH%-%TARGET_OS%\test_pdalcd.exe" "build\%ARCH%-%TARGET_OS%\test_pdalcd.exe"
 

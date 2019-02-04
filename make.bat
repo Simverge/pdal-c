@@ -5,14 +5,19 @@
 :: TODO Auto-detect latest platform
 set SCRIPT_DIR=%~dp0
 
-if not defined TOOLCHAIN set TOOLCHAIN=%VCPKG_ROOT%\scripts\buildsystems\vcpkg.cmake
 if not defined BUILD_TYPE set BUILD_TYPE=Release
 if not defined ARCH set ARCH=x64
 if not defined TARGET_OS set TARGET_OS=windows
-
 set TRIPLET=%ARCH%-%TARGET_OS%
 
-set BUILD_DIR=%SCRIPT_DIR%\build\%TRIPLET%
+if defined TOOLCHAIN (
+	set TOOLCHAIN_ARG=-DCMAKE_TOOLCHAIN_FILE=%TOOLCHAIN%
+	set TRIPLET_ARG=-DVCPKG_TARGET_TRIPLET=%TRIPLET%
+	set BUILD_DIR=%SCRIPT_DIR%\build\%TRIPLET%
+) else if defined PREFIX_PATH (
+	set PREFIX_PATH_ARG=-DCMAKE_PREFIX_PATH=%PREFIX_PATH%
+	set BUILD_DIR=%SCRIPT_DIR%\build\%TRIPLET%-osgeo4w
+)
 
 if exist "%BUILD_DIR%\pdal-c.sln" (
 	pushd "%BUILD_DIR%"
@@ -21,9 +26,10 @@ if exist "%BUILD_DIR%\pdal-c.sln" (
 	pushd "%BUILD_DIR%"
 
 	cmake ../.. ^
+		%PREFIX_PATH_ARG% ^
+		%TOOLCHAIN_ARG% ^
+		%TRIPLET_ARG% ^
 		-DCMAKE_BUILD_TYPE=%BUILD_TYPE% ^
-		-DCMAKE_TOOLCHAIN_FILE=%TOOLCHAIN% ^
-		-DVCPKG_TARGET_TRIPLET=%TRIPLET% ^
 		-DCMAKE_GENERATOR_PLATFORM=%ARCH%
 )
 
