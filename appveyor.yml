@@ -32,6 +32,7 @@ init:
 install:
   - set ARCH=%PLATFORM%
   - set BUILD_TYPE=%CONFIGURATION%
+  - echo %PREFIX_PATH%
   - call make.bat
 
 build_script:

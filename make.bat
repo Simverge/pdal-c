@@ -1,5 +1,5 @@
 :: Helper script for vcpkg-based x64-windows vscode build tasks
-@echo off
+:: @echo off
 
 :: This script assumes that cmake is in PATH
 :: TODO Auto-detect latest platform
@@ -15,6 +15,7 @@ if defined TOOLCHAIN (
 	set TRIPLET_ARG=-DVCPKG_TARGET_TRIPLET=%TRIPLET%
 	set BUILD_DIR=%SCRIPT_DIR%\build\%TRIPLET%
 ) else if defined PREFIX_PATH (
+	set PDAL_DIR_ARG=-DPDAL_DIR=%PREFIX_PATH%
 	set PREFIX_PATH_ARG=-DCMAKE_PREFIX_PATH=%PREFIX_PATH%
 	set BUILD_DIR=%SCRIPT_DIR%\build\%TRIPLET%-osgeo4w
 )
@@ -26,6 +27,7 @@ if exist "%BUILD_DIR%\pdal-c.sln" (
 	pushd "%BUILD_DIR%"
 
 	cmake ../.. ^
+		%PDAL_DIR_ARG% ^
 		%PREFIX_PATH_ARG% ^
 		%TOOLCHAIN_ARG% ^
 		%TRIPLET_ARG% ^
