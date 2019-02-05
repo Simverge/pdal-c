@@ -94,7 +94,7 @@ size_t PDALGetDimTypeIdName(PDALDimType dim, char *name, size_t size)
         std::string s = pdal::Dimension::name(
                             static_cast<pdal::Dimension::Id>(dim.id));
         std::strncpy(name, s.c_str(), size);
-        result = std::min(std::strlen(name), size);
+        result = (std::min)(std::strlen(name), size);
     }
 
     return result;
@@ -109,7 +109,7 @@ size_t PDALGetDimTypeInterpretationName(PDALDimType dim, char *name, size_t size
         std::string s = pdal::Dimension::interpretationName(
                             static_cast<pdal::Dimension::Type>(dim.type));
         std::strncpy(name, s.c_str(), size);
-        result = std::min(std::strlen(name), size);
+        result = (std::min)(std::strlen(name), size);
     }
 
     return result;

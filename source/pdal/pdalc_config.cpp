@@ -64,7 +64,7 @@ size_t PDALGetGdalDataPath(char *path, size_t size)
         if (env)
         {
             std::strncpy(path, env, size - 1);
-            length = std::min(std::strlen(env), size - 1);
+            length = (std::min)(std::strlen(env), size - 1);
         }
     }
 
@@ -94,7 +94,7 @@ size_t PDALGetProj4DataPath(char *path, size_t size)
         if (env)
         {
             std::strncpy(path, env, size - 1);
-            length = std::min(std::strlen(env), size - 1);
+            length = (std::min)(std::strlen(env), size - 1);
         }
     }
 
@@ -128,7 +128,7 @@ size_t PDALFullVersionString(char *version, size_t size)
 
         std::string s = pdal::Config::fullVersionString();
         std::strncpy(version, s.c_str(), size - 1);
-        length = std::min(s.length(), size - 1);
+        length = (std::min)(s.length(), size - 1);
     }
 
     return length;
@@ -145,7 +145,7 @@ size_t PDALVersionString(char *version, size_t size)
 
         std::string s = pdal::Config::versionString();
         std::strncpy(version, s.c_str(), size - 1);
-        length = std::min(s.length(), size - 1);
+        length = (std::min)(s.length(), size - 1);
     }
 
     return length;
@@ -167,7 +167,7 @@ size_t PDALSha1(char *sha1, size_t size)
 
         std::string s = pdal::Config::sha1();
         std::strncpy(sha1, s.c_str(), size - 1);
-        length = std::min(s.length(), size - 1);
+        length = (std::min)(s.length(), size - 1);
     }
 
     return length;
@@ -199,7 +199,7 @@ size_t PDALDebugInformation(char *info, size_t size)
 
         std::string s = pdal::Config::debugInformation();
         std::strncpy(info, s.c_str(), size - 1);
-        length = std::min(s.length(), size - 1);
+        length = (std::min)(s.length(), size - 1);
     }
 
     return length;
@@ -216,7 +216,7 @@ size_t PDALPluginInstallPath(char *path, size_t size)
 
         std::string s = pdal::Config::pluginInstallPath();
         std::strncpy(path, s.c_str(), size - 1);
-        length = std::min(s.length(), size - 1);
+        length = (std::min)(s.length(), size - 1);
     }
 
     return length;

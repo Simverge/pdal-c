@@ -118,7 +118,7 @@ extern "C"
                 {
                     std::string s = executor->getPipeline();
                     std::strncpy(buffer, s.c_str(), size - 1);
-                    result = std::min(s.length(), size);
+                    result = (std::min)(s.length(), size);
                 }
                 catch (const std::exception &e)
                 {
@@ -148,7 +148,7 @@ extern "C"
                 {
                     std::string s = executor->getMetadata();
                     std::strncpy(metadata, s.c_str(), size);
-                    result = std::min(s.length(), size);
+                    result = (std::min)(s.length(), size);
                 }
                 catch (const std::exception &e)
                 {
@@ -177,7 +177,7 @@ extern "C"
                 {
                     std::string s = executor->getSchema();
                     std::strncpy(schema, s.c_str(), size);
-                    result = std::min(s.length(), size);
+                    result = (std::min)(s.length(), size);
                 }
                 catch (const std::exception &e)
                 {
@@ -206,7 +206,7 @@ extern "C"
                 {
                     std::string s = executor->getLog();
                     std::strncpy(log, s.c_str(), size);
-                    result = std::min(s.length(), size);
+                    result = (std::min)(s.length(), size);
                 }
                 catch (const std::exception &e)
                 {

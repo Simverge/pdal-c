@@ -98,7 +98,7 @@ extern "C"
             {
                 std::string s = (*wrapper)->spatialReference().getProj4();
                 std::strncpy(proj, s.c_str(), size - 1);
-                result = std::min(s.length(), size);
+                result = (std::min)(s.length(), size);
             }
         }
 
@@ -126,7 +126,7 @@ extern "C"
                 }
 
                 std::strncpy(wkt, s.c_str(), size - 1);
-                result = std::min(s.length(), size);
+                result = (std::min)(s.length(), size);
             }
         }
 
