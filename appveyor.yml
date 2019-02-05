@@ -35,7 +35,7 @@ init:
   - curl -fsS -o %DOWNLOAD_DIR%\osgeo4w-setup-x86_64.exe http://download.osgeo.org/osgeo4w/osgeo4w-setup-x86_64.exe
 
 install:
-  - echo . | %DOWNLOAD_DIR%\osgeo4w-setup-x86_64.exe --autoaccept --no-shortcuts --no-startmenu --no-desktop --quiet-mode --arch x86_64 --download --advanced --site http://download.osgeo.org/osgeo4w --root %OSGEO4W_ROOT% --packages pdal
+  - echo . | %DOWNLOAD_DIR%\osgeo4w-setup-x86_64.exe --autoaccept --no-shortcuts --no-startmenu --no-desktop --quiet-mode --arch x86_64 --advanced --site http://download.osgeo.org/osgeo4w --packages pdal
 
 build_script:
   - set ARCH=%PLATFORM%
