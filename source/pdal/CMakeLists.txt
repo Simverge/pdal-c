@@ -1,5 +1,7 @@
 set(TARGET pdalc)
 
+message(STATUS "PDAL_DIR: ${PDAL_DIR}")
+
 find_package(PDAL)
 
 if(NOT PDAL_FOUND)
