@@ -29,6 +29,10 @@
 
 #include "pdal/pdalc_dimtype.h"
 
+#include <algorithm>
+#include <cstdio>
+#include <cstring>
+
 #include <pdal/DimType.hpp>
 
 namespace pdal
@@ -50,7 +54,7 @@ size_t PDALGetDimTypeListSize(PDALDimTypeListPtr types)
         }
         catch (const std::exception &e)
         {
-            printf("%s\n", e.what());
+            std::printf("%s\n", e.what());
         }
     }
 
@@ -139,7 +143,7 @@ PDALDimType PDALGetDimType(PDALDimTypeListPtr types, size_t index)
         }
         catch (const std::exception &e)
         {
-            printf("%s\n", e.what());
+            std::printf("%s\n", e.what());
         }
     }
 

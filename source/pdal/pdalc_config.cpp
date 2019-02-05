@@ -29,6 +29,7 @@
 
 #include "pdalc_config.h"
 
+#include <algorithm>
 #include <cstdlib>
 #include <cstring>
 #include <string>

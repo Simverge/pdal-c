@@ -29,6 +29,9 @@
 
 #include "pdalc_pipeline.h"
 
+#include <algorithm>
+#include <cstdio>
+#include <cstring>
 #include <string>
 
 #include <pdal/PipelineExecutor.hpp>
@@ -56,7 +59,7 @@ extern "C"
             }
             catch (const std::exception &e)
             {
-                printf("Could not create pipeline: %s\n%s\n", e.what(), json);
+                std::printf("Could not create pipeline: %s\n%s\n", e.what(), json);
                 executor = nullptr;
             }
 
@@ -70,7 +73,7 @@ extern "C"
                 }
                 catch (const std::exception &e)
                 {
-                    printf("Error while validating pipeline: %s\n%s\n", e.what(), json);
+                    std::printf("Error while validating pipeline: %s\n%s\n", e.what(), json);
                 }
 
                 if (valid)
@@ -81,7 +84,7 @@ extern "C"
                 {
                     delete executor;
                     executor = NULL;
-                    printf("The pipeline is invalid:\n%s\n", json);
+                    std::printf("The pipeline is invalid:\n%s\n", json);
                 }
             }
         }
@@ -119,7 +122,7 @@ extern "C"
                 }
                 catch (const std::exception &e)
                 {
-                    printf("Found error while retrieving pipeline's string representation: %s\n", e.what());
+                    std::printf("Found error while retrieving pipeline's string representation: %s\n", e.what());
                 }
             }
 
@@ -149,7 +152,7 @@ extern "C"
                 }
                 catch (const std::exception &e)
                 {
-                    printf("Found error while retrieving pipeline's metadata: %s\n", e.what());
+                    std::printf("Found error while retrieving pipeline's metadata: %s\n", e.what());
                 }
             }
         }
@@ -178,7 +181,7 @@ extern "C"
                 }
                 catch (const std::exception &e)
                 {
-                    printf("Found error while retrieving pipeline's schema: %s\n", e.what());
+                    std::printf("Found error while retrieving pipeline's schema: %s\n", e.what());
                 }
             }
         }
@@ -207,7 +210,7 @@ extern "C"
                 }
                 catch (const std::exception &e)
                 {
-                    printf("Found error while retrieving pipeline's log: %s\n", e.what());
+                    std::printf("Found error while retrieving pipeline's log: %s\n", e.what());
                 }
             }
         }
@@ -227,7 +230,7 @@ extern "C"
             }
             catch (const std::exception &e)
             {
-                printf("Found error while setting log level: %s\n", e.what());
+                std::printf("Found error while setting log level: %s\n", e.what());
             }
         }
     }
@@ -251,7 +254,7 @@ extern "C"
             }
             catch (const std::exception &e)
             {
-                printf("Found error while executing pipeline: %s", e.what());
+                std::printf("Found error while executing pipeline: %s", e.what());
             }
         }
 
@@ -271,7 +274,7 @@ extern "C"
             }
             catch (const std::exception &e)
             {
-                printf("Found error while validating pipeline: %s", e.what());
+                std::printf("Found error while validating pipeline: %s", e.what());
             }
         }
 
@@ -296,7 +299,7 @@ extern "C"
             }
             catch (const std::exception &e)
             {
-                printf("Found error while retrieving point views: %s\n", e.what());
+                std::printf("Found error while retrieving point views: %s\n", e.what());
             }
         }
 
