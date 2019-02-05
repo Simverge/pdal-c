@@ -2,10 +2,6 @@ set(TARGET pdalc)
 
 find_package(PDAL REQUIRED CONFIG)
 message(STATUS "Found PDAL ${PDAL_VERSION}")
-message(STATUS "PDAL_LIBRARY_DIRS: ${PDAL_LIBRARY_DIRS}")
-message(STATUS "PDAL_INCLUDE_DIRS: ${PDAL_INCLUDE_DIRS}")
-message(STATUS "PDAL_LIBRARIES: ${PDAL_LIBRARIES}")
-message(STATUS "PDAL_DEFINITIONS: ${PDAL_DEFINITIONS}")
 
 set(SOURCES
 	pdalc_config.cpp
@@ -31,6 +27,10 @@ set(HEADERS
 set(DEPENDENCIES
 	${PDAL_LIBRARIES}
 )
+
+if(WIN32)
+	list(APPEND PDAL_LIBRARIES wsock32 ws2_32)
+endif()
 
 link_directories(
 	${PDAL_LIBRARY_DIRS}
