@@ -40,8 +40,6 @@ install:
 build_script:
   - set ARCH=%PLATFORM%
   - set BUILD_TYPE=%CONFIGURATION%
-  - cd
-  - dir
   - call make.bat
   - echo "Built %PLATFORM%-%TARGET_OS%-%CONFIGURATION%"
 

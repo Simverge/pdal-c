@@ -10,14 +10,20 @@ if not defined ARCH set ARCH=x64
 if not defined TARGET_OS set TARGET_OS=windows
 set TRIPLET=%ARCH%-%TARGET_OS%
 
-if defined TOOLCHAIN (
-	set TOOLCHAIN_ARG=-DCMAKE_TOOLCHAIN_FILE=%TOOLCHAIN%
-	set TRIPLET_ARG=-DVCPKG_TARGET_TRIPLET=%TRIPLET%
-	set BUILD_DIR=%SCRIPT_DIR%\build\%TRIPLET%
-) else if defined PREFIX_PATH (
+set BUILD_DIR=
+set PDAL_DIR_ARG=
+set PREFIX_PATH_ARG=
+set TOOLCHAIN_ARG=
+set TRIPLET_ARG=
+
+if defined PREFIX_PATH (
 	set PDAL_DIR_ARG=-DPDAL_DIR=%PREFIX_PATH%\lib\pdal\cmake
 	set PREFIX_PATH_ARG=-DCMAKE_PREFIX_PATH=%PREFIX_PATH%
 	set BUILD_DIR=%SCRIPT_DIR%\build\%TRIPLET%-osgeo4w
+) else if defined TOOLCHAIN (
+	set TOOLCHAIN_ARG=-DCMAKE_TOOLCHAIN_FILE=%TOOLCHAIN%
+	set TRIPLET_ARG=-DVCPKG_TARGET_TRIPLET=%TRIPLET%
+	set BUILD_DIR=%SCRIPT_DIR%\build\%TRIPLET%
 )
 
 if exist "%BUILD_DIR%\pdal-c.sln" (
@@ -39,4 +45,3 @@ if exist "%BUILD_DIR%\pdal-c.sln" (
 cmake --build . --target INSTALL --config %BUILD_TYPE%
 
 popd
-
