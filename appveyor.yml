@@ -22,6 +22,7 @@ clone_depth: 5
 
 cache:
   - C:\Tools\downloads
+  - C:\Tools\vcpkg -> appveyor.yml
   - C:\OSGeo4W64
 
 environment:

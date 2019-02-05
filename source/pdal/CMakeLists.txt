@@ -8,10 +8,14 @@ message(STATUS "PDAL_DIR: ${PDAL_DIR}")
 find_package(PDAL)
 
 if(NOT PDAL_FOUND)
+	message(STATUS "Could not find PDAL, attempting config-based search")
 	find_package(PDAL REQUIRED CONFIG)
 endif()
 
 message(STATUS "Found PDAL ${PDAL_VERSION}")
+message(STATUS "Found PDAL ${PDAL_LIBRARIES}")
+message(STATUS "Found PDAL ${PDAL_LIBRARY_DIRS}")
+message(STATUS "Found PDAL ${PDAL_INCLUDE_DIRS}")
 
 set(SOURCES
 	pdalc_config.cpp
