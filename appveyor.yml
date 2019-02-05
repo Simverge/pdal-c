@@ -20,29 +20,29 @@ image: Visual Studio 2017
 shallow_clone: true
 clone_depth: 5
 
-environment:
-  OSGEO4W_ROOT: C:\OSGeo4W64
-  PREFIX_PATH: '%OSGEO4W_ROOT%'
-  TARGET_OS: windows
-
-
 cache:
   - C:\Tools\downloads
   - C:\OSGeo4W64
 
+environment:
+  DOWNLOAD_DIR: C:\Tools\downloads
+  OSGEO4W_ROOT: C:\OSGeo4W64
+  PREFIX_PATH: '%OSGEO4W_ROOT%'
+  TARGET_OS: windows
+
 init:
-  - mkdir C:\Tools\downloads
-  - curl -s -S -o C:\Tools\downloads\osgeo4w-setup-x86_64.exe http://download.osgeo.org/osgeo4w/osgeo4w-setup-x86_64.exe
-  - echo . | C:\Tools\downloads\osgeo4w-setup-x86_64.exe --autoaccept --no-shortcuts --no-startmenu --no-desktop --quiet-mode --arch x86_64 --download --advanced --site http://download.osgeo.org/osgeo4w --root %OSGEO4W_ROOT% --packages pdal
+  - mkdir %DOWNLOAD_DIR%
+  - curl -fsS -o %DOWNLOAD_DIR%\osgeo4w-setup-x86_64.exe http://download.osgeo.org/osgeo4w/osgeo4w-setup-x86_64.exe
 
 install:
+  - echo . | %DOWNLOAD_DIR%\osgeo4w-setup-x86_64.exe --autoaccept --no-shortcuts --no-startmenu --no-desktop --quiet-mode --arch x86_64 --download --advanced --site http://download.osgeo.org/osgeo4w --root %OSGEO4W_ROOT% --packages pdal
+
+build_script:
   - set ARCH=%PLATFORM%
   - set BUILD_TYPE=%CONFIGURATION%
   - echo %PREFIX_PATH%
   - dir %OSGEO4W_ROOT%\lib\pdal\cmake
   - call make.bat
-
-build_script:
   - echo "Built %PLATFORM%-%TARGET_OS%-%CONFIGURATION%"
 
 test_script:
