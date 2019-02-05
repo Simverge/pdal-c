@@ -39,6 +39,7 @@ install:
   - set ARCH=%PLATFORM%
   - set BUILD_TYPE=%CONFIGURATION%
   - echo %PREFIX_PATH%
+  - dir %OSGEO4W_ROOT%\lib\pdal\cmake
   - call make.bat
 
 build_script:
