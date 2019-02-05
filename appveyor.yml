@@ -21,9 +21,9 @@ shallow_clone: true
 clone_depth: 5
 
 cache:
-  - C:\Tools\downloads
+  - C:\Tools\downloads -> appveyor.yml
   - C:\Tools\vcpkg -> appveyor.yml
-  - C:\OSGeo4W64
+  - C:\OSGeo4W64 -> appveyor.yml
 
 environment:
   DOWNLOAD_DIR: C:\Tools\downloads
