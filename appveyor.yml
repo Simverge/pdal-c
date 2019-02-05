@@ -21,14 +21,14 @@ shallow_clone: true
 clone_depth: 5
 
 environment:
-  OSGEO4W_ROOT: C:\Tools\osgeo4w64
+  OSGEO4W_ROOT: C:\OSGeo4W64
   PREFIX_PATH: '%OSGEO4W_ROOT%'
   TARGET_OS: windows
 
 
 cache:
   - C:\Tools\downloads
-  - C:\Tools\osgeo4w64
+  - C:\OSGeo4W64
 
 init:
   - mkdir C:\Tools\downloads
