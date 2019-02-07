@@ -28,8 +28,9 @@ set(DEPENDENCIES
 	${PDAL_LIBRARIES}
 )
 
+# Add winsock libraries to dependencies so appveyor build can find them
 if(WIN32)
-	list(APPEND PDAL_LIBRARIES wsock32 ws2_32)
+	list(APPEND DEPENDENCIES wsock32 ws2_32)
 endif()
 
 link_directories(
