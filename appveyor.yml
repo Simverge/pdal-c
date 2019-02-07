@@ -30,6 +30,7 @@ environment:
   OSGEO4W_ROOT: C:\OSGeo4W64
   PREFIX_PATH: '%OSGEO4W_ROOT%'
   TARGET_OS: windows
+  BUILD_DIR: build\%ARCH%-%TARGET_OS%-osgeo4w # where make.bat generates the Visual Studio project
 
 init:
   - mkdir %DOWNLOAD_DIR%
@@ -45,12 +46,15 @@ build_script:
   - echo "Built %PLATFORM%-%TARGET_OS%-%CONFIGURATION%"
 
 test_script:
+  # These environment variables allow PDAL to locate GDAL and proj4 configuration files
   - set GDAL_DATA=%OSGEO4W_ROOT%\share\gdal
   - set PROJ_LIB=%OSGEO4W_ROOT%\share\proj
-  - if exist "build\%ARCH%-%TARGET_OS%\test_pdalc.exe" "build\%ARCH%-%TARGET_OS%\test_pdalc.exe"
-  - if exist "build\%ARCH%-%TARGET_OS%\test_pdalcd.exe" "build\%ARCH%-%TARGET_OS%\test_pdalcd.exe"
+
+  # pdal-c appends "d" to debug binaries, so either test_pdalc.exe or test_pdalcd.exe should be present, not both
+  - if exist "%BUILD_DIR%\test_pdalc.exe" "%BUILD_DIR%\test_pdalc.exe"
+  - if exist "%BUILD_DIR%\test_pdalcd.exe" "%BUILD_DIR%\test_pdalcd.exe"
 
 after_test:
-  - if exist "build\%ARCH%-%TARGET_OS%\test_pdalc.exe" erase "build\%ARCH%-%TARGET_OS%\test_pdalc.exe"
-  - if exist "build\%ARCH%-%TARGET_OS%\test_pdalcd.exe" erase "build\%ARCH%-%TARGET_OS%\test_pdalcd.exe"
+  - if exist "%BUILD_DIR%\test_pdalc.exe" erase "%BUILD_DIR%\test_pdalc.exe"
+  - if exist "%BUILD_DIR%\test_pdalcd.exe" erase "%BUILD_DIR%\test_pdalcd.exe"
 
