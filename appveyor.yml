@@ -49,9 +49,10 @@ test_script:
   # These environment variables allow PDAL to locate GDAL and proj4 configuration files
   - set GDAL_DATA=%OSGEO4W_ROOT%\share\gdal
   - set PROJ_LIB=%OSGEO4W_ROOT%\share\proj
-  - echo %BUILD_DIR%
-  - dir %BUILD_DIR%\bin\*.exe
-  # pdal-c appends "d" to debug binaries, so either test_pdalc.exe or test_pdalcd.exe should be present, not both
+  - set PATH=%PATH%;%OSGEO4W_ROOT%\bin
+  - dir %BUILD_DIR%\bin\*
+
+    # pdal-c appends "d" to debug binaries, so either test_pdalc.exe or test_pdalcd.exe should be present, not both
   - if exist "%BUILD_DIR%\bin\test_pdalc.exe" "%BUILD_DIR%\bin\test_pdalc.exe"
   - if exist "%BUILD_DIR%\bin\test_pdalcd.exe" "%BUILD_DIR%\bin\test_pdalcd.exe"
 
