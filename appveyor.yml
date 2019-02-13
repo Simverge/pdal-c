@@ -20,10 +20,10 @@ image: Visual Studio 2017
 shallow_clone: true
 clone_depth: 5
 
-cache:
-  - C:\Tools\downloads
-  - C:\Tools\vcpkg
-  - C:\OSGeo4W64
+# cache:
+#  - C:\Tools\downloads
+#  - C:\Tools\vcpkg
+#  - C:\OSGeo4W64
 
 environment:
   DOWNLOAD_DIR: C:\Tools\downloads
@@ -37,7 +37,7 @@ init:
   - curl -fsS -o %DOWNLOAD_DIR%\osgeo4w-setup-x86_64.exe http://download.osgeo.org/osgeo4w/osgeo4w-setup-x86_64.exe
 
 install:
-  - echo . | %DOWNLOAD_DIR%\osgeo4w-setup-x86_64.exe --autoaccept --no-shortcuts --no-startmenu --no-desktop --quiet-mode --arch x86_64 --advanced --site http://download.osgeo.org/osgeo4w --packages pdal > NUL
+  - echo . | %DOWNLOAD_DIR%\osgeo4w-setup-x86_64.exe --autoaccept --no-shortcuts --no-startmenu --no-desktop --quiet-mode --arch x86_64 --advanced --site http://download.osgeo.org/osgeo4w --packages pdal
 
   - dir %OSGEO4W_ROOT%\bin
   
