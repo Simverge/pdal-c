@@ -37,13 +37,10 @@ init:
   - curl -fsS -o %DOWNLOAD_DIR%\osgeo4w-setup-x86_64.exe http://download.osgeo.org/osgeo4w/osgeo4w-setup-x86_64.exe
 
 install:
-  - set
   - echo . | %DOWNLOAD_DIR%\osgeo4w-setup-x86_64.exe --autoaccept --no-shortcuts --no-startmenu --no-desktop --quiet-mode --arch x86_64 --advanced --site http://download.osgeo.org/osgeo4w --packages pdal
-  - dir %OSGEO4W_ROOT%\bin
-  
+
   # Run pdal.exe to make sure PDAL is ok
-  - call %OSGEO4W_ROOT%\bin\pdal.exe
-  - call %OSGEO4W_ROOT%\bin\pdal.exe --version
+  - %OSGEO4W_ROOT%\bin\pdal.exe && ( echo "pdal.exe succeeded" || echo "pdal.exe failed: Error level %ERRORLEVEL%" )
 
 build_script:
   - set ARCH=%PLATFORM%
