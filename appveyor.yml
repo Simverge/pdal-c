@@ -20,10 +20,10 @@ image: Visual Studio 2017
 shallow_clone: true
 clone_depth: 5
 
-# cache:
-#  - C:\Tools\downloads
-#  - C:\Tools\vcpkg
-#  - C:\OSGeo4W64
+cache:
+  - C:\Tools\downloads
+  - C:\Tools\vcpkg
+  - C:\OSGeo4W64
 
 environment:
   DOWNLOAD_DIR: C:\Tools\downloads
@@ -44,7 +44,7 @@ install:
   - cmd /c exit 0
   - echo Error level before calling pdal.exe is %ERRORLEVEL%
     # Run pdal.exe to make sure PDAL is ok
-  - cmd /c "%OSGEO4W_ROOT%\\bin\\pdal.exe"
+  - cmd /c "%OSGEO4W_ROOT%\\bin\\pdal.exe" ^ echo called pdal.exe
   - echo Error level after calling pdal.exe is %ERRORLEVEL%
 
 build_script:
