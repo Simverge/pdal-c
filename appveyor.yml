@@ -38,6 +38,7 @@ init:
 
 install:
   - echo . | %DOWNLOAD_DIR%\osgeo4w-setup-x86_64.exe --autoaccept --no-shortcuts --no-startmenu --no-desktop --quiet-mode --arch x86_64 --advanced --site http://download.osgeo.org/osgeo4w --packages pdal
+  - set PATH
   - set PATH=%PATH%;%OSGEO4W_ROOT%\bin
 
   # Reset ERRORLEVEL
