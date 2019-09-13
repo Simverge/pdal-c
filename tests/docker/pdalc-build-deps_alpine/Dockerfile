@@ -13,4 +13,5 @@ RUN \
 		make \
 		cmake \
 		curl \
-		wget
+		wget \
+		python3
