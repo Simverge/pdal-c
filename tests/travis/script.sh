@@ -35,7 +35,11 @@ cmake -G "Unix Makefiles" \
 	${PDALC_CMAKE_ARGS} \
 	"${CI_PROJECT_DIR}"
 
-if [ "$SCAN" = "sonarcloud" ]; then
+if [ "$SCAN" = "coveralls" ]; then
+	pip install --user cpp-coveralls
+	echo "repo_token: ${COVERALLS_TOKEN}" > ${CI_PROJECT_DIR}/.coveralls.yml
+	coveralls --exclude tests --build-root ${CI_PROJECT_DIR}/build/${TARGET_PLATFORM} --root ${CI_PROJECT_DIR} --gcov-options '\-lp'
+elif [ "$SCAN" = "sonarcloud" ]; then
 	${SONARCLOUD_DIR}/build-wrapper-linux-x86-64 --out-dir ${CI_PROJECT_DIR}/bw-output make
 elif [ "$SCAN" = "coverity" ] && [ "$TRAVIS_BRANCH" = "master" ]; then
 	${COVERITY_DIR}/cov-configure --gcc

@@ -13,7 +13,7 @@ addons:
       secure: $SONAR_TOKEN
 
 env:
-  - DISTRO=alpine BUILD_TYPE=Release
+  - DISTRO=alpine BUILD_TYPE=Release SCAN=coveralls
   - DISTRO=alpine BUILD_TYPE=Debug
   - DISTRO=ubuntu BUILD_TYPE=Release SCAN=coverity
   - DISTRO=ubuntu BUILD_TYPE=Debug SCAN=sonarcloud
@@ -24,5 +24,5 @@ before_install:
 script:
   - if [ "$SCAN" = "sonarcloud" ]; then git fetch --unshallow --tags --quiet; fi
   - chmod u+x $TRAVIS_BUILD_DIR/tests/travis/script.sh
-  - docker run -e SCAN -e COVERITY_EMAIL -e COVERITY_TOKEN -e TRAVIS_COMMIT -e TRAVIS_BRANCH -e BUILD_TYPE -e DISTRO -v $TRAVIS_BUILD_DIR:/pdalc -t simverge/pdalc-build-deps:$DISTRO /pdalc/tests/travis/script.sh
+  - docker run -e SCAN -e COVERALLS_TOKEN -e COVERITY_EMAIL -e COVERITY_TOKEN -e TRAVIS_COMMIT -e TRAVIS_BRANCH -e BUILD_TYPE -e DISTRO -v $TRAVIS_BUILD_DIR:/pdalc -t simverge/pdalc-build-deps:$DISTRO /pdalc/tests/travis/script.sh
   - if [ "$SCAN" = "sonarcloud" ]; then sonar-scanner; fi
